@@ -1,19 +1,35 @@
 package org.example;
 class Node {
-    public String name;
-    public double data;
+    private String name;
+    private double data;
     public Node next;
 
     public Node(String name, double data) {
-        this.name = name;
-        this.data = data;
+        this.setName(name);
+        this.setData(data);
         this.next = null;
     }
 
     public Node(){
-        this.name = " ";
-        this.data = 0;
+        this.setName(" ");
+        this.setData(0);
         this.next = null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getData() {
+        return data;
+    }
+
+    public void setData(double data) {
+        this.data = data;
     }
 }
 public class PQList {
@@ -27,7 +43,7 @@ public class PQList {
     }
 
     public double getBalance(){
-        return this.head.data;
+        return this.head.getData();
     }
 
     //Copy Constructor
@@ -35,7 +51,7 @@ public class PQList {
         this.head = null;
         this.tail = x.tail;
         Node temp = head;
-        Account a = new Account(temp.name, temp.data);
+        Account a = new Account(temp.getName(), temp.getData());
         while(temp != null){
             this.add(a);
             temp = temp.next;
@@ -47,21 +63,26 @@ public class PQList {
         String y = acc.getName();
         double x = acc.getBalance();
         Node newNode = new Node(y, x);
-        Node temp1 = new Node;
-        if (head == null) {
+        if (head == null || x >= head.getData()) {
+            newNode.next = head;
             head = newNode;
-            tail = newNode;
+            return;
+        }
+
+        // Traverse the list to find the appropriate position for the new node
+        Node current = head;
+        Node prev = null;
+        while (current != null && current.getData() > x) {
+            prev = current;
+            current = current.next;
+        }
+
+        // Insert the new node at the correct position
+        newNode.next = current;
+        if (prev != null) {
+            prev.next = newNode;
         } else {
-            temp1 = head;
-            if (x < this.getBalance() && tail.next != null) {
-                temp1.next = newNode;
-            }
-            else {
-                Node temp = new Node();
-                temp = head;
-                this.head = newNode;
-                head.next = temp;
-            }
+            head = newNode;
         }
 
     }
@@ -71,7 +92,7 @@ public class PQList {
     public void printList() {
         Node temp = head;
         while(temp != null){
-            System.out.println(temp.name + " " + temp.data);
+            System.out.println(temp.getName() + " " + temp.getData());
             temp = temp.next;
         }
     }

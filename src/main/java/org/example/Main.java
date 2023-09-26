@@ -4,10 +4,6 @@ public class Main {
     public static void main(String[] args) {
         PQList x = new PQList();
 
-        Account test = new Account();
-        test.setName("Lo");
-        test.setBalance(123.12);
-        x.add(test);
 
 
 
@@ -26,12 +22,12 @@ public class Main {
         test4.setBalance(19.1);
         x.add(test4);
 
-//        Account test5 = new Account();
-//        test5.setName("Leo");
-//        test5.setBalance(2);
-//        x.add(test5);
+        Account test5 = new Account();
+        test5.setName("Leo");
+        test5.setBalance(10000000);
+        x.add(test5);
 
-        System.out.println(test.equals(test2));
+
 
         x.printList();
 
